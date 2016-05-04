@@ -1,0 +1,29 @@
+
+
+create database spring default character set utf8;
+use spring
+
+create table user (
+id bigint auto_increment primary key,
+username varchar(30),
+credits int,
+password varchar(32),
+last_visit datetime,
+last_ip varchar(32)
+)engine=innodb;
+
+create table login_log(
+id bigint auto_increment primary key,
+user_id bigint,
+ip varchar(32),
+login_datetime datetime
+)engine=innodb;
+
+insert into user(username,password) values('admin','123456');
+
+
+
+
+
+
+
