@@ -1,0 +1,115 @@
+
+
+spring3.x企业应用开发实战
+
+第一章 spring概述
+
+spring缔造者：rod johnson
+
+spring是分层的javaee应用一站式的轻量级开源框架，以IoC和AOP为内核，提供了展现层springMVC和springJDBC以及业务层事务管理等众多的企业级应用技术
+
+2004年发布spring第一个版本，并成立了springsource公司，2009年该公司被vmware收购
+
+好的设计应优于具体实现，代码应易于测试
+
+如果想在短时间内提升自己的java水平，学习和研究spring源码会有意想不到的效果
+
+spring3新增了许多功能，可以了解一下
+
+
+第二章
+
+一个demo
+
+第三章
+
+IoC是spring的核心，和DI（依赖注入）等价
+
+依赖注入的方式有三种：接口注入、构造方法注入、属性注入
+
+spring容器通过java反射机制来实例化bean对象，然后创建bean之间的依赖关系。除此之外，还提供了缓存、生命周期管理、代理、事件发布、资源装载等高级服务
+
+spring设计了一个Resource接口代表底层的资源，它有多个实现类（如：FileSystemResource、ClassPathResource等）。通过ResourceLoader接口可以方便的访问资源
+
+BeanFactory是spring框架最核心的接口，而ApplicationContext则更多面向应用的功能
+
+使用XmlBeanFactory来管理bean：
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        Resource resource = resolver.getResource("classpath:beans.xml");
+        XmlBeanFactory fac = new XmlBeanFactory(resource);
+        LoginLog log = fac.getBean("loginLog", LoginLog.class);
+
+启动BeanFactory时，必须给他提供一种日志框架，如log4j
+
+使用ApplicationContext来管理bean：
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans.xml");
+        Object obj = context.getBean("loginLog");
+
+WebApplicationContext是专门为web准备的，它允许从web根目录下装载配置文件完成初始化工作，它作为attribute放入到ServletContext中。
+Spring专门提供了WebApplicationContextUtils来通过ServletContext获取WebApplicationContext
+
+WebApplicationContext的启动需要ServletContext，在web.xml中可以指定ContextLoaderServlet或者ContextLoaderListener来启动。
+通过contextConfigLocation参数来指定启动时的配置文件
+启动时，还需要配置Log4jConfigServlet或者Log4jConfigListener来启动log4j框架，该框架需要配置log4jConfigLocation参数
+
+controller bean位于父容器中，service bean和dao bean位于子容器中，controller bean可以访问到下层的bean，而下层的bean访问不到上层的bean
+
+第四章
+
+bean配置文件中，bean节点下的property节点的效果是调用相应的setter方法，并不一定需要bean中有对应的属性
+
+注入null值：<property name=""><null/></property>
+
+spring可以给bean注入list、set、map、properties集合属性
+
+如果要注入spring不认识的类型（如日期等），可以用到属性编辑器类来将string类型转化成需要的类型，再配置一些即可
+
+bean作用域：singleton、prototype、request、session、globalSession
+
+FactoryBean：通过实现该接口，在配置文件中定义bean时class指定该接口的实现类可以生成指定的bean
+
+通过注解来定义bean：
+@Component   通用注解
+@Repository  给DAO实现类注解
+@Service     给Service实现类注解
+@Controller  给Controller实现类注解
+
+通过注解注入bean：
+@Autowired       默认requied为true，如果允许为空，那么设置该值为false
+@Qualifier("")   指定注入的bean的名称
+
+通过注解指定bean的作用域：
+@Scope
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
