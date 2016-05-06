@@ -82,6 +82,13 @@ FactoryBean：通过实现该接口，在配置文件中定义bean时class指定
 @Scope
 
 
+第五章
+
+属性编辑器
+
+国际化
+
+事件
 
 
 

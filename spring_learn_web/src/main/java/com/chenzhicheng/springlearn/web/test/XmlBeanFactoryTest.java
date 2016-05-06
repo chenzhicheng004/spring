@@ -14,10 +14,10 @@ public class XmlBeanFactoryTest {
 
     public static void main(String[] args) throws Exception{
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource resource = resolver.getResource("classpath:beans.xml");
+        Resource resource = resolver.getResource("applicationContext-propertyEditor.xml");
 
         XmlBeanFactory fac = new XmlBeanFactory(resource);
         LoginLog log = fac.getBean("loginLog", LoginLog.class);
-        System.out.println(log.getId());
+        System.out.println(log.getLoginDateTime());
     }
 }
