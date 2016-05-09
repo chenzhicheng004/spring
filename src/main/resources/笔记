@@ -191,6 +191,104 @@ spring获取数据库连接的方式：
 ibatis的第三个版本更名为myBatis
 
 
+第十三章
+
+Quartz是任务调度的开源框架，只要向框架提供时间点、执行什么任务这两个信息即可完成任务的调度
+
+JDK Timer也可以提供任务调度的功能
+
+
+第十四章
+
+xml和java对象的映射技术（oxm）：
+    XStream：还可以处理json对象
+    JAXB
+    XMLBeans
+    Castor
+    JiBX
+
+spring整合了oxm框架，可以方便使用它们
+
+
+第十五章
+
+DispatcherServlet截获请求分发给相应的处理器处理，它负责协调和组织不同的组件完成请求处理并返回响应的工作
+
+springMVC处理流程：
+    客户端发送http请求
+    DispatcherServlet截获请求，通过HandlerMapping分发给处理器
+    处理器处理完成之后返回ModelAndView给DispatcherServlet
+    DispatcherServlet根据其中的视图逻辑名，通过ViewResolver解析成真正的视图对象
+    DispatcherServlet使用模型数据渲染视图对象
+    将渲染之后的结果返回到客户端，客户端拿到的可能是http页面、xml、json串、图片、文件等
+
+springMVC是基于Model2实现的框架
+
+DispatcherServlet初始化后，就会自动扫描上下文的bean，根据名称或者类型的机制查找自定义组件，找不到则使用DispatcherServlet.properties定义的默认组件
+
+请求信息包括：
+    请求url
+    请求参数
+    请求方法
+    请求头
+
+RequestMapping指定路径时，可以模糊匹配，也可以使用占位符（如：“/{userId}”），在方法的参数前面加上@PathVariable（"userId"）即可获得该值
+
+RequestMapping还可以通过请求的方法、请求头、请求参数来设置请求路径
+
+可以在请求方法参数的前面加上@RequestParam参数来获得请求的参数，@CookieValue来获得cookie值，@RequestHeader来获得请求头的值。通过这些注解的required参数来设置是否必须
+
+请求方法的参数可以直接是一个表单对象，spring会自动根据参数去给该对象赋值
+
+请求方法的参数也可以是servlet api对象，如：
+    HTTPServletRequest
+    HttpServletResponse
+    HttpSession
+
+HttpMessageConverter接口是spring3新增的，它可以讲http请求转化为对象，将对象输出为响应信息，spring默认提供了多个实现类处理不同的数据格式
+
+将处理器得到的模型数据传递到视图的方法：
+    请求方法返回ModelAndView，将数据放入该对象中
+    请求方法参数注解@ModelAttribute，参数会放入到model中，如果对请求方法使用该注解则会把请求方法的返回值放入model中
+    @SessionAttribute可以将参数放入到session中，可以给类使用该注解
+    请求方法参数是map类型或者model类型，将数据放入map或model中即可
+
+springMVC通过反射机制对目标方法的签名进行解析，将请求数据绑定到处理方法的入参中，数据绑定的核心部件是DataBinder
+
+数据绑定做的工作：
+    数据转换：编写转换类，将它配置到spring即可
+    数据格式化
+    数据校验
+
+常见的视图技术：
+    JSP：InternalResourceViewResolver
+    FreeMarker：FreeMarkerViewResolver
+    Velocity
+
+springMVC直接支持文件上传
+
+
+第十六章
+
+测试框架：
+    JUnit
+    Mockito
+    Unitils
+    Dbunit
+
+JUnit测试用例完整生命周期：
+    类级初始化资源
+    方法级初始化资源
+    执行测试方法
+    销毁方法级资源
+    销毁类级资源
+
+ 断言：预测结果和实际结果的比较
+
+
+
+
+
 
 
 
